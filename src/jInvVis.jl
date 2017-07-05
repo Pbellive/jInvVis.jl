@@ -30,6 +30,12 @@ module jInvVis
     catch
     end
 
+    hasWriteVTK = false
+    try
+        using WriteVTK
+        hasWriteVTK = true
+    catch
+    end
     
     if hasPyPlot
         include("plotGrid.jl");
@@ -41,6 +47,10 @@ module jInvVis
 
     if hasJOcTree & hasMATLAB
         include("plotOcTreeMesh.jl")
+    end
+    
+    if hasWriteVTK
+        include("exportVTK.jl")
     end
 
     export hasPyPlot, hasJOcTree, hasMATLAB
